@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'cubit/countercubit.dart';
+import 'bloc/counterblock.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          BlocBuilder<CounterCubit, int>(
+          BlocBuilder<CounterBloc, int>(
             builder: (context, counterval) {
               return Text(
                 "$counterval",
@@ -39,13 +39,13 @@ class HomeScreen extends StatelessWidget {
         children: [
           FloatingActionButton(
             heroTag: 'increment',
-            onPressed: () => context.read<CounterCubit>().increment(),
+            onPressed: () => context.read<CounterBloc>().add(IncrementEvent()),
             child: const Icon(Icons.add),
           ),
           const SizedBox(height: 12),
           FloatingActionButton(
             heroTag: 'decrement',
-            onPressed: () => context.read<CounterCubit>().decrement(),
+            onPressed: () => context.read<CounterBloc>().add(DecrementEvent()),
             child: const Icon(Icons.remove),
           ),
         ],
